@@ -16,3 +16,14 @@ An interactive web app is available by [clicking this link instead].
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 library(tidyverse)
 ```
+
+#Data Import and Cleaning 
+I imported the week3 data set into the week8_tbl. I reverse scored Q5, I used the rowwise function to apply my subsequent commands to all the rows of  week8_tbl otherwise, then I used mutate to create new variables while preserving old variables, the new variables I wanted to create were two variables that contained participants mean scores of Q1-Q6, and also Q8-10. 
+```{r, data_import_and_cleaning}
+week8_tbl <- read_csv("../data/week3.csv") %>%
+  mutate(q5 = recode(q5, "1"="5", "2"="4","3"="3", "4"="2", "5"="1")) %>% 
+  mutate(q5=as.numeric(q5)) %>%
+  rowwise() %>%
+  mutate(meanQ1Q6 = mean(c(q1:q6)))%>%
+  mutate(meanQ8Q10 = mean(c(q8:q10)))
+```
