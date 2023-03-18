@@ -27,3 +27,16 @@ week8_tbl <- read_csv("../data/week3.csv") %>%
   mutate(meanQ1Q6 = mean(c(q1:q6)))%>%
   mutate(meanQ8Q10 = mean(c(q8:q10)))
 ```
+
+
+## Visualization
+I used the select function to display contained in Q1-Q6 because I already loaded tidyverse and the selection function is part of dplyr which is in tidyverse, it allows me to refer to just those variables. To make the display paginated I did (COMEBACK). I then used ggplot2 to display a scatterplot of participants mean scores on Q1-Q6 by their mean scores on Q8-Q10, using the geom_point function and retained the "se=T" command to display the shaded error band.
+```{r, visualization, message=FALSE, echo=FALSE}
+week8_tbl%>%
+  select(q1:q6)
+
+ggplot(week8_tbl, aes(x=meanQ1Q6, y=meanQ8Q10))+
+  geom_point()+
+  geom_smooth(method = "lm", se=T, color="purple")+
+  labs(x="Mean scores on Q1-Q6", y="Mean scores on Q8-Q10")
+```
