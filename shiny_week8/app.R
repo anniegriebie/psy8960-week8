@@ -19,3 +19,7 @@ ui <- fluidPage(
         )
       )
 )
+
+#Server function
+server <- function(input, output)
+  shiny_data<-ReadRDS("shiny_data_week8.rds")
