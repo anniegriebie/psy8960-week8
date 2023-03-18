@@ -54,5 +54,5 @@ I removed data columns that are not needed for the shiny app to make the datatab
 week8_tbl %>%
   select(-q7, -timeStart)%>%
   mutate(gender = factor(gender, levels = c("M", "F"), labels = c("Male",  "Female"))) %>%
-  saveRDS(file = "../shiny/shiny_data_week8.rds")
+  saveRDS(file = "../shiny_week8/shiny_data_week8.rds")
 ```
