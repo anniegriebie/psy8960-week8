@@ -25,7 +25,7 @@ ui <- fluidPage(
 server <- function(input, output) {
   
   #using readRDS to rename skinny data
-  shiny_data<-ReadRDS("shiny_data_week8.rds")
+  shiny_data<-read_rds("shiny_data_week8.rds")
   
   #adding expression to generate scatter plot
   output$plot = renderPlot({
