@@ -10,7 +10,7 @@ ui <- fluidPage(
           #Added option to show subsets of participant by gender, with All as default  
           selectInput("gender", "Gender:", choices = c("Male", "Female", "All"), selected = "All"),
           #Added option to show or supress error band on plot, with dipaly of error band set as default
-          selectInput("error_band", "Display or Supress Error Band:", choices =c("Display Error Band", "Suppress Error Band"), selected = "Display Error Band"),
+          selectInput("error_band", "Display or Supress Error Band:", choices =c("Display Error Band" = "TRUE", "Suppress Error Band" = "FALSE"), selected = "Display Error Band"),
           #Added option to include or exclude participants who completed assignement before given date, with exclude set to default
           selectInput("date_completed", "Include or Exclude paticipants who completed assessment before August 1, 2017", choices=c("Include", "Exclude"), selected="Exclude"),
         ),
@@ -32,14 +32,19 @@ server <- function(input, output) {
    
      shiny_data%>%
     #Adding option to filter gender when select something other than default "All"
-    if(input$gender != "All") {
-      filter(gender=input$gender)
-    }
+    (if(input$gender != "All")
+      filter(gender=input$gender))
+  
     #Adding option to filter participant finishing date
-    if(input$error_band != "Include") {
-      filter(timeEnd < "2017-08-01 00:00:00")}
+   (if(input$error_band != "Include") 
+      filter(timeEnd < "2017-08-01 00:00:00"))
     
-    #Adding option to have or exclude error band
+    #Creating ggplot
+    ggplot(aes(x=meanQ1Q6, y=meanQ8Q10))+
+    geom_point()
+    geom_smooth(method ="lm", color="purple", se=as.logical(input$error_band))+
+      labs(x="Mean score Q1-Q6", y= "Mean score Q8-Q10")
+    
      })
       
     }
