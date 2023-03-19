@@ -32,16 +32,14 @@ server <- function(input, output) {
    
      shiny_data%>%
     #Adding option to filter gender when select something other than default "All"
-    (if(input$gender != "All")
-      filter(gender=input$gender))
+    filter(if(input$gender != "All") gender==input$gender else TRUE) %>%
   
     #Adding option to filter participant finishing date
-   (if(input$error_band != "Include") 
-      filter(timeEnd < "2017-08-01 00:00:00"))
+   filter(if(input$date_completed != "Include") timeEnd < "2017-08-01 00:00:00" else TRUE) %>%
     
     #Creating ggplot
     ggplot(aes(x=meanQ1Q6, y=meanQ8Q10))+
-    geom_point()
+    geom_point() +
     geom_smooth(method ="lm", color="purple", se=as.logical(input$error_band))+
       labs(x="Mean score Q1-Q6", y= "Mean score Q8-Q10")
     
