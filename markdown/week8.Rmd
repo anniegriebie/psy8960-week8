@@ -6,19 +6,19 @@ output:
     df_print: paged
 ---
 
-# Reproducible Image and Online Resources
+# **Reproducible Image and Online Resources**
 An image of this project as of *`r Sys.Date()* can be accessed by [clicking this link].
 An interactive web app is available by [clicking this link instead] (https://anniepsy8960datascience.shinyapps.io/shiny_week8/).
 
 
-# Script Settings and Resources
+# **Script Settings and Resources**
 ```{r,setup, message=FALSE}
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 library(tidyverse)
 library(lubridate)
 ```
 
-#Data Import and Cleaning 
+# **Data Import and Cleaning **
 I imported the week3 data set into the week8_tbl. I reverse scored Q5, I used the rowwise function to apply my subsequent commands to all the rows of  week8_tbl otherwise, then I used mutate to create new variables while preserving old variables, the new variables I wanted to create were two variables that contained participants mean scores of Q1-Q6, and also Q8-10. 
 ```{r, data_import_and_cleaning}
 week8_tbl <- read_csv("../data/week3.csv") %>%
@@ -30,7 +30,7 @@ week8_tbl <- read_csv("../data/week3.csv") %>%
 ```
 
 
-## Visualization
+# **Visualization**
 I used the select function to display contained in Q1-Q6 because I already loaded tidyverse and the selection function is part of dplyr which is in tidyverse, it allows me to refer to just those variables. To make the display paginated I did (COMEBACK). I then used ggplot2 to display a scatterplot of participants mean scores on Q1-Q6 by their mean scores on Q8-Q10, using the geom_point function and retained the "se=T" command to display the shaded error band.
 ```{r, visualization, message=FALSE, echo=FALSE}
 week8_tbl%>%
@@ -42,15 +42,16 @@ ggplot(week8_tbl, aes(x=meanQ1Q6, y=meanQ8Q10))+
   labs(x="Mean scores on Q1-Q6", y="Mean scores on Q8-Q10")
 ```
 
-## Analysis
+## **Analysis**
 I used the cor.test function to find the correlation between participants mean scores on Q1-Q6 and Q8-10. 
 ```{r, analysis}
 cor.test(week8_tbl$meanQ1Q6, week8_tbl$meanQ8Q10)
 ```
 I observed a correlation of `r `week8_tbl$meanQ1Q6, week8_tbl$meanQ8Q10`. The p-value is observed to be 0.5184 which is greater than an alpha value set to 0.05 or 0.01, thus suggesting the correlation is not statistically significant. 
 
-## Data Export
+## **Data Export**
 I removed data columns that are not needed for the shiny app to make the datatable "skinny". I relabeled the gender column. 
+
 ```{r, data_export}
 week8_tbl %>%
   select(-q7, -timeStart)%>%
