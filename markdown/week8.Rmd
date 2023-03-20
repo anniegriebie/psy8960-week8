@@ -45,11 +45,11 @@ ggplot(week8_tbl, aes(x=meanQ1Q6, y=meanQ8Q10))+
 ```
 
 ## **Analysis**
-I used the cor.test function to find the correlation between participants mean scores on Q1-Q6 and Q8-10. 
+I used the cor.test function to find the correlation between participants mean scores on Q1-Q6 and Q8-10.
 ```{r analysis}
 cor.test(week8_tbl$meanQ1Q6, week8_tbl$meanQ8Q10)
 ```
-I observed a correlation of `r `week8_tbl$meanQ1Q6, week8_tbl$meanQ8Q10`. The p-value is observed to be 0.5184 which is greater than an alpha value set to 0.05 or 0.01, thus suggesting the correlation is not statistically significant. 
+I observed a correlation of `r cor(week8_tbl$meanQ1Q6, week8_tbl$meanQ8Q10)`. The p-value is observed to be 0.5184 which is greater than an alpha value set to 0.05 or 0.01, thus suggesting the correlation is not statistically significant. 
 
 ## **Data Export**
 I removed data columns that are not needed for the shiny app to make the datatable "skinny". I relabeled the gender column. 
