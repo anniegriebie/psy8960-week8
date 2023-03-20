@@ -9,7 +9,8 @@ knit: (function(inputFile, encoding) {
 ---
 
 # **Reproducible Image and Online Resources**
-An image of this project as of *`r Sys.Date()* can be accessed by [clicking this link] (https://mybinder.org/v2/gh/anniegriebie/psy8960-week8.git/HEAD?urlpath=rstudio).
+An image of this project as of *`r Sys.Date()* can be accessed by [clicking this link] (https://mybinder.org/v2/gh/anniegriebie/psy8960-week8.git/HEAD
+?urlpath=rstudio).
 An interactive web app is available by [clicking this link instead] (https://anniepsy8960datascience.shinyapps.io/shiny_week8/).
 
 
